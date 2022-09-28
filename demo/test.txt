@@ -1,0 +1,78 @@
+./mvnw spring-boot:run
+http://localhost:8080/
+
+openssl req -newkey rsa:2048 -new -nodes -x509 -days 2 -keyout key.pem -out cert.pem
+
+openssl pkcs12 -export -inkey key.pem -in cert.pem -out file.p12 -name "My Certificate" 
+
+openssl pkcs12 -export -out server.p12 -inkey key.pem -in cert.pem -passin pass:nttdata@123 -passout pass:nttdata@123
+
+mkdir -p ~/.config/spring-boot
+
+cd /Users/jincyjeveen/.config/spring-boot
+
+cp /Users/jincyjeveen/Documents/Work/Java_Cert_Renew/file.p12 /Users/jincyjeveen/.config/spring-boot
+
+~/.config/spring-boot/spring-boot-devtools.properties
+
+
+lsof -i :8443 | grep LISTEN
+kill -9 8443
+
+java -jar -Dspring.config.location=/Users/jincyjeveen/Documents/Work/Java_Cert_Renew/demo/target/classes/application.properties demo-0.0.1-SNAPSHOT.war
+
+
+fb5cab20-3d91-11ed-9ed4-7d61a4a777f8
+
+
+
+
+
+
+index="main" "java.lang.OutOfMemoryError: Java heap space" | stats count as total | where total > 0 | index=summary alertName= |  collect index=summary marker="alertName=\"java_app_mem_leak\"" addtime=T
+
+
+index="main" "java.lang.OutOfMemoryError: Java heap space" | stats count as total | where total > 0 | join type=outer api_name [ search index=summary ] | fillnull value= “No” is_alerted | where is_alerted = “No” | collect index=summary marker=” Alert_name =\”Alert - Java App OutOfMemory Error\” api_name = \“alerted api\” is_alerted=\”Yes\” ”
+
+
+
+index="_internal" color=* | stats count(color) by color | join type=outer color [ search index=summary ] | fillnull value= "No" is_alerted | where is_alerted = "No"| collect index=summary marker=”Alert_name=\"ACS Alert 1\", color=green, is_alerted=\"Yes\"
+
+
+
+
+Succesfully read CSR file.
+Certificate ID a355ecc0-3e95-11ed-bafa-91e43a2954c0
+Certificate Status RETIRED
+Certificate Name localhost
+Certificate ID 51182720-3e95-11ed-8886-43c096168a3b
+Certificate Status RETIRED
+Certificate Name localhost
+Certificate ID f1590b60-3e94-11ed-bafa-91e43a2954c0
+Certificate Status RETIRED
+Certificate Name localhost
+Certificate ID 164a2d90-3e96-11ed-8608-9f15c65c73f1
+Certificate Status ACTIVE
+Certificate Name localhost
+WARNING: Certificate with Name: localhost, with ID, 164a2d90-3e96-11ed-8608-9f15c65c73f1, about to expire.
+SUCCESS: Certificate with ID: 164a2d90-3e96-11ed-8608-9f15c65c73f1 renewed.
+SUCCESS: Downloaded renewed certificate from Venafi with ID: 164a2d90-3e96-11ed-8608-9f15c65c73f1
+---------------------------------------------------------
+Certificate ID cab70f70-3e94-11ed-9ed4-7d61a4a777f8
+Certificate Status RETIRED
+Certificate Name localhost
+Certificate ID 8649aa50-3e94-11ed-8d09-0deeb0b5df83
+Certificate Status RETIRED
+Certificate Name localhost
+Certificate ID 6f926ac0-3e91-11ed-b8a2-997f4f2c47f4
+Certificate Status RETIRED
+Certificate Name localhost
+Certificate ID 08c3e7b0-3e91-11ed-8886-43c096168a3b
+Certificate Status RETIRED
+Certificate Name localhost
+Certificate ID b03cf0f0-3e90-11ed-9ed4-7d61a4a777f8
+Certificate Status RETIRED
+Certificate Name localhost
+Certificate ID 7b6c6ef0-3e90-11ed-8886-43c096168a3b
+Certificate Status RETIRED
+Certificate Name loca
