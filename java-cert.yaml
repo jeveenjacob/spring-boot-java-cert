@@ -1,0 +1,51 @@
+---
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: mem-leak-java
+  labels:
+    app: java
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: java
+  name: java
+  namespace: mem-leak-java
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mem-leak-java
+      io.kompose.service: mem-leak-java
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mem-leak-java
+        io.kompose.service: mem-leak-java
+    spec:
+      containers:
+        - name: java
+          image: jeveenj/java-cert-sample
+          ports:
+          - containerPort: 8443
+          resources: {}
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java
+  namespace: mem-leak-java
+  labels:
+    app: java
+spec:
+  ports:
+  - port: 8443
+    protocol: TCP
+  selector:
+    app: java

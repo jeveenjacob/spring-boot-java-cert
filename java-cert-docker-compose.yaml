@@ -1,0 +1,5 @@
+version: '3'
+services:
+  java-cert-sample:
+    build: .
+    image: jeveenj/java-cert-sample
