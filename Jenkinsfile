@@ -33,6 +33,7 @@ pipeline {
                sh(
                   script:
                          """\
+                        kubectl delete --ignore-not-found=true -f ./java-cert.yaml
                         kubectl apply -f ./java-cert.yaml
                          """,
                       )
