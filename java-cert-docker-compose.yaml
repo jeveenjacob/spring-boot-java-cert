@@ -1,6 +1,6 @@
-ports:
-  - 8443:30443
 services:
   java-cert-sample:
     build: .
     image: jeveenj/java-cert-sample
+    ports:
+      - 8443:30443
