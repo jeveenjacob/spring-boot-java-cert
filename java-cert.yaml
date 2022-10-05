@@ -47,7 +47,7 @@ spec:
   type: NodePort
   ports:
     - port: 8443
-      nodePort: 32443
+      nodePort: 30443
       targetPort: 8443
   selector:
     app: java
