@@ -1,6 +1,6 @@
 version: '3'
  ports:
-  - "8000:80"
+  - "8442:30443"
 services:
   java-cert-sample:
     build: .
