@@ -1,5 +1,4 @@
-version: '3'
- ports:
+ports:
   - 8443:30443
 services:
   java-cert-sample:
